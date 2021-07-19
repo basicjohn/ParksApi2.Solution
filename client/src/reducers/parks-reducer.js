@@ -15,6 +15,9 @@ const parksReducer = (state = defaultState, action) => {
     case GET_PARKS_FAILURE:
     case GET_PARKS_SUCCESS:
     case REQUEST_PARKS:
+      return Object.assign({}, state, {
+        isLoading: true
+      })
     default:
       return state
   }
