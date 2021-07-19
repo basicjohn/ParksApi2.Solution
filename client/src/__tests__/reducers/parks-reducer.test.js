@@ -41,4 +41,11 @@ describe('parksReducer', () => {
     const newState = parksReducer(defaultState, action)
     expect(newState.isLoading).toBe(false)
   })
+
+  test('GET PARKS FAILURE should set isLoading to false and return an error', () => {
+    action = { type: GET_PARKS_FAILURE }
+    const error = "New ERROR"
+    const newState = parksReducer(defaultState, action)
+    expect(newState.error).toBe(error)
+  })
 })
