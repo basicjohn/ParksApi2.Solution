@@ -18,14 +18,21 @@ describe('parksReducer', () => {
     VisitorCountInPreviousYear: 3806306
   }
 
+  const defaultState = {
+    isLoading: false,
+    parks: [],
+    error: null
+  }
+
   test('Should return default state if there is no action type passed in the reducer', () => {
-    const state = {
-      data: [],
-      error: null,
-      loading: false
-    }
     action = { type: null }
-    const newState = parksReducer(state, action)
-    expect(newState).toEqual(state)
+    const newState = parksReducer(defaultState, action);
+    expect(newState).toEqual(defaultState);
+  })
+
+  test('requesting parks should successfully change isLoading from false to true', () => {
+    action = { type: REQUEST_PARKS }
+    const newState = parksReducer(defaultState, action)
+    expect(newState.isLoading).toBe(true)
   })
 })
