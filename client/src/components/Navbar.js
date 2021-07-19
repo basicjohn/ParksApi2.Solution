@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { GiConverseShoe } from 'react-icons/gi'
 
 function Navbar(props) {
@@ -7,7 +8,6 @@ function Navbar(props) {
     background: 'rgba(200,200,200,0.7)',
     alignContent: 'center',
     alignItems: 'center',
-    marginBottom: '22px',
     overflow: 'none'
   }
   const linkStyles = {
@@ -25,16 +25,12 @@ function Navbar(props) {
     lineHeight: '50px',
     paddingRight: '10px'
   }
+
   return (
-    <div style={navbarStyles}>
-      <a type='submit'
-        onClick={event => props.navigateTo(event, 'home')}
-        style={linkStyles} href='/'
-      >
-        <div style={linkDivStyles}><GiConverseShoe style={{ fontSize: '40px'}} /></div>
-        <span>Home</span>
-      </a>
-    </div>
+    <nav style={navbarStyles}>
+      <Link style={linkStyles} to='/'>Home</Link>
+      <Link style={linkStyles} to='/parks'>Parks</Link>
+    </nav>
   )
 }
 

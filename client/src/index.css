@@ -158,3 +158,10 @@ h3 {
 h4 {
   font-size: 1.25rem;
 }
+
+.container {
+  /* 92px header + 59.2px footer */
+  min-height: calc(100vh - 152px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
