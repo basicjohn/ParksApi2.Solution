@@ -26,13 +26,19 @@ describe('parksReducer', () => {
 
   test('Should return default state if there is no action type passed in the reducer', () => {
     action = { type: null }
-    const newState = parksReducer(defaultState, action);
-    expect(newState).toEqual(defaultState);
+    const newState = parksReducer(defaultState, action)
+    expect(newState).toEqual(defaultState)
   })
 
   test('requesting parks should successfully change isLoading from false to true', () => {
     action = { type: REQUEST_PARKS }
     const newState = parksReducer(defaultState, action)
     expect(newState.isLoading).toBe(true)
+  })
+
+  test('GET_PARKS_SUCCESS should set isloading to false and return data array', () => {
+    action = { type: GET_PARKS_SUCCESS }
+    const newState = parksReducer(defaultState, action)
+    expect(newState.isLoading).toBe(false)
   })
 })
