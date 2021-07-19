@@ -1,4 +1,9 @@
 import parksReducer from "./../../reducers/parks-reducer"
+import {
+  GET_PARKS_SUCCESS,
+  GET_PARKS_FAILURE,
+  REQUEST_PARKS,
+} from "./../../actions/actions"
 
 describe('parksReducer', () => {
   let action
