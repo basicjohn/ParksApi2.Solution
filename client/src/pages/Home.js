@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import middlewareApi from './../middleware/middleware-api'
+import makeApiGetCall from './../actions/index.js'
 
 import Header from './../components/Header'
 
@@ -11,7 +11,7 @@ class Home extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(middlewareApi())
+    dispatch(makeApiGetCall())
   }
 
   render() {

@@ -19,18 +19,17 @@ namespace Parks
     {
       Configuration = configuration;
     }
-
     public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddCors();
       services.AddDbContext<ParksContext>(opt =>
                 opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
       services.AddControllers();
       services.AddApiVersioning(config =>
         {
-
           config.DefaultApiVersion = new ApiVersion(1, 0);
           config.AssumeDefaultVersionWhenUnspecified = true;
           config.ReportApiVersions = true;
@@ -64,19 +63,17 @@ namespace Parks
       {
         app.UseDeveloperExceptionPage();
       }
-
-
       app.UseSwagger();
-
       app.UseSwaggerUI(c =>
       {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
       });
-
       app.UseRouting();
-
       app.UseAuthorization();
-
+      app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
