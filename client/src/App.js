@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import Home from './pages/Home'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+
+import Home from "./pages/Home"
+import Parks from "./pages/Parks"
+import Park from "./pages/Park"
+
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 
@@ -12,11 +17,21 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Router>
         <Navbar />
-        <Home />
+        <Switch>
+          <Route path='/'>
+            <Home/>
+          </Route>
+          <Route path='/parks'>
+            <Parks />
+          </Route>
+          <Route path='/park/:id'>
+            <Park />
+          </Route>
+        </Switch>
         <Footer />
-      </div>
+      </Router>
     )
   }
 }
