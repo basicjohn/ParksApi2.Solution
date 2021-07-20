@@ -30,4 +30,3 @@ const makeApiGetCall = (parkType = null, parkName = null, established = null) =>
 
 export default makeApiGetCall
 
- 

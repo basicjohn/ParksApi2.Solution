@@ -8,6 +8,8 @@ namespace Parks.Models
     [Required]
     public int ParkId { get; set; }
     [Required]
+    public bool ParkStatus { get; set; }
+    [Required]
     public string ParkType { get; set; }
     [Required]
     public string ParkName { get; set; }
@@ -21,6 +23,8 @@ namespace Parks.Models
     public int VisitorCountInPreviousYear { get; set; }
     [Required]
     public int AreaInSquareKm { get; set; }
+    [Required]
+    public string ParkImg {get; set;}
   }
 }
 
