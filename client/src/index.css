@@ -159,6 +159,11 @@ h4 {
   font-size: 1.25rem;
 }
 
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
 .container {
   /* 92px header + 59.2px footer */
   min-height: calc(100vh - 152px);

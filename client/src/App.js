@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import FadeIn from 'react-fade-in'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import makeApiGetCall from './actions/index.js'
@@ -38,38 +37,44 @@ class App extends Component {
 
   render() {
     const { error, isLoading, parks } = this.props
-    console.log("APP RENDER", error, isLoading, parks)
-    if (error) {
-      return <>{JSON.stringify(error)}</>
-    } else if (isLoading) {
-      return <>Loading...</>
-    } else {
-      return (
-        <Router>
-          <Navbar />
-          <FadeIn>
-            <Switch>
-              <Route exact path="/parks">
-                <Parks parks={parks} />
-              </Route>
-              <Route exact path="/park/:id" render={({ location }) => {
-                  const path = location.pathname.split('/')
-                  const parkArr = parks.filter((p) => p.parkId.toString() === path[2].toString());
-                  return <Park {...parkArr[0]} />
-                }}
-              />
-              <Route exact path="/">
-                <Home park={parks[this.state.featuredParkIndex]} />
-              </Route>
-              <Route path="*">
-                <NotFound />
-              </Route>
-            </Switch>
-          </FadeIn>
-          <Footer />
-        </Router>
-      )
-    }
+    return (
+      <Router>
+        <Navbar />
+        {error ? (
+          <>{JSON.stringify(error)}</>
+        ) : isLoading || parks.length === 0 ? (
+          <div className="container">
+            <h1>Loading...</h1>
+          </div>
+        ) : (
+          <Switch>
+            <Route exact path="/parks">
+              <Parks parks={parks} />
+            </Route>
+            <Route
+              exact
+              path="/park/:id"
+              render={({ location }) => {
+                const path = location.pathname.split("/");
+                const parkArr = parks.filter(
+                  (p) => p.parkId.toString() === path[2].toString()
+                );
+                return (
+                  <Park {...parkArr[0]} />
+                );
+              }}
+            />
+            <Route exact path="/">
+              <Home park={parks[this.state.featuredParkIndex]} />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        )}
+        <Footer />
+      </Router>
+    );
   }
 }
 
