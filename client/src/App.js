@@ -37,8 +37,8 @@ class App extends Component {
   }
 
   render() {
-    console.log("APP RENDER", this.props)
     const { error, isLoading, parks } = this.props
+    console.log("APP RENDER", error, isLoading, parks)
     if (error) {
       return <>{JSON.stringify(error)}</>
     } else if (isLoading) {
@@ -50,11 +50,14 @@ class App extends Component {
           <FadeIn>
             <Switch>
               <Route exact path="/parks">
-                <Parks />
+                <Parks parks={parks} />
               </Route>
-              <Route exact path="/park/:id">
-                <Park />
-              </Route>
+              <Route exact path="/park/:id" render={({ location }) => {
+                  const path = location.pathname.split('/')
+                  const parkArr = parks.filter((p) => p.parkId.toString() === path[2].toString());
+                  return <Park {...parkArr[0]} />
+                }}
+              />
               <Route exact path="/">
                 <Home park={parks[this.state.featuredParkIndex]} />
               </Route>
@@ -65,7 +68,7 @@ class App extends Component {
           </FadeIn>
           <Footer />
         </Router>
-      );
+      )
     }
   }
 }
